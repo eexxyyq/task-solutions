@@ -1,36 +1,37 @@
 package ru.eexxyyq.solutions.tasks.week2;
 
 /**
- * Дана строка, состоящая из слов, разделённых пробелами. Пробелов между словами может быть более одного.
- * Вывести ту же строку, только слова в ней должны быть перевёрнуты. Время O(N)
+ * На болоте есть n островков, выстроенных в линию. Лягушка находится на первом, но хочет попасть на последний.
+ * Дан массив из n-1 натуральных чисел - расстояние в метрах между островками. Лягушка может прыгать на k метров.
+ * Найти минимальное количество прыжков, которое надо сделать лягушке.
+ * N <= 10^6
  */
 public class Task3 {
 
-    public static String solution(String s) {
-        var sb = new StringBuilder();
-        var start = -1;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == ' ') {
-                if (start != -1) {
-                    for (int j = i - 1; j >= start ; j--) {
-                        sb.append(s.charAt(j));
-                    }
-                    sb.append(' ');
-                    start = -1;
-                } else {
-                    sb.append(' ');
+    public static int solution(int[] arr, int k) {
+        if (arr.length == 0) {
+            return -1;
+        }
+        int result = 0;
+        int sum = 0;
+        int index = 0;
+        while (index < arr.length) {
+            if (arr[index] > k) {
+                return -1;
+            }
+            if (sum <= k) {
+                sum += arr[index];
+                if (sum <= k) {
+                    index++;
                 }
             } else {
-                if (start == -1) {
-                    start = i;
-                }
+                result++;
+                sum = 0;
             }
         }
-        if (start != -1) {
-            for (int j = s.length() - 1; j >= start; j--) {
-                sb.append(s.charAt(j));
-            }
+        if (sum != 0) {
+            result++;
         }
-        return sb.toString();
+        return result;
     }
 }
