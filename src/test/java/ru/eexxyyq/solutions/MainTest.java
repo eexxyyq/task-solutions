@@ -1,4 +1,4 @@
-package test.java.ru.eexxyyq.solutions;
+package ru.eexxyyq.solutions;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
