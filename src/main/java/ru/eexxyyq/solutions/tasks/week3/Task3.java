@@ -10,6 +10,47 @@ package ru.eexxyyq.solutions.tasks.week3;
  */
 public class Task3 {
 
+    private static int solutionKMP(String haystack, String needle) {
+        int[] pi = new int[needle.length()];
+        int i = 1;
+        int j = 0;
+        pi[0] = 0;
+        while (i < pi.length) {
+            if (needle.charAt(i) != needle.charAt(j)) {
+                if (j == 0) {
+                    pi[i++] = 0;
+                } else {
+                    j = pi[j - 1];
+                }
+            } else {
+                pi[i] = j + 1;
+                j++;
+                i++;
+            }
+        }
+        int k = 0;
+        int l = 0;
+        while (k < haystack.length()) {
+            if (haystack.charAt(k) == needle.charAt(l)) {
+                l++;
+                k++;
+                if (l == needle.length()) {
+                    return k - l;
+                }
+            } else {
+                if (l == 0) {
+                    k++;
+                    if (k == haystack.length()) {
+                        return -1;
+                    }
+                } else {
+                    l = pi[l - 1];
+                }
+            }
+        }
+        return -1;
+    }
+
     public static int strStr(String haystack, String needle) {
         if (haystack.equals(needle) || needle.isBlank()) {
             return 0;
