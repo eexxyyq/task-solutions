@@ -20,5 +20,22 @@ class Task6Test {
         assertFalse(Task6.isValidSequence("(([)])"));
         assertFalse(Task6.isValidSequence("(([])]"));
         assertFalse(Task6.isValidSequence("([[])]"));
+        assertFalse(Task6.isValidSequence("]"));
+    }
+
+    @Test
+    void isValidSequenceWithoutType() {
+        assertFalse(Task6.isValidSequenceWithoutTypes(""));
+        assertFalse(Task6.isValidSequenceWithoutTypes(null));
+        assertFalse(Task6.isValidSequenceWithoutTypes("     "));
+        assertFalse(Task6.isValidSequenceWithoutTypes("()[)]"));
+        assertFalse(Task6.isValidSequenceWithoutTypes("[)()]"));
+        assertFalse(Task6.isValidSequenceWithoutTypes("[(()()]"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("()[]"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("(([]))"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("([])([])([])([])"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("(([)])"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("(([])]"));
+        assertTrue(Task6.isValidSequenceWithoutTypes("([[])]"));
     }
 }

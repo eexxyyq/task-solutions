@@ -12,6 +12,25 @@ import java.util.LinkedList;
  */
 public class Task6 {
 
+    public static boolean isValidSequenceWithoutTypes(String str) {
+        if (str == null || str.isBlank() || str.isEmpty()) {
+            return false;
+        }
+        int balancer = 0;
+        for (int i = 0; i < str.length(); i++) {
+            var ch = str.charAt(i);
+            if (ch == '(' || ch == '[') {
+                balancer++;
+            } else {
+                balancer--;
+                if (balancer < 0) {
+                    return false;
+                }
+            }
+        }
+        return balancer == 0;
+    }
+
     public static boolean isValidSequence(String str) {
         if (str == null || str.isBlank() || str.isEmpty()) {
             return false;
@@ -22,13 +41,14 @@ public class Task6 {
             if (ch == '(' || ch == '[') {
                 stack.add(ch);
             }
-            if (!stack.isEmpty()) {
-                if (ch == ']' && stack.removeLast() != '[') {
-                    return false;
-                }
-                if (ch == ')' && stack.removeLast() != '(') {
-                    return false;
-                }
+            if (stack.isEmpty()) {
+                return false;
+            }
+            if (ch == ']' && stack.removeLast() != '[') {
+                return false;
+            }
+            if (ch == ')' && stack.removeLast() != '(') {
+                return false;
             }
         }
         return stack.isEmpty();
